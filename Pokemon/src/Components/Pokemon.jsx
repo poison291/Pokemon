@@ -1,11 +1,13 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import axios from 'axios';
+import PokemonDetail from './PokemonDetail';
 import './Pokemon.css';
 
 export default function Pokemon() {
     const [pokemon, setpokemon] = useState([]);
     const [loading, setloading] = useState(true);
+    const [selectedPokemonUrl, setSelectedPokemonUrl] = useState(null);
     const [page, setpage] = useState(1);
 
     const limit = 15;
@@ -50,6 +52,9 @@ export default function Pokemon() {
             behavior: "smooth"
         })
     }
+    const handlePokemonClick = (url) => {
+        setSelectedPokemonUrl(url);
+    };
 
     return (
         <>
@@ -70,7 +75,7 @@ export default function Pokemon() {
                         ))
                     }
                 </div>
-
+                {selectedPokemonUrl && <PokemonDetail pokemonUrl={selectedPokemonUrl} />}
 
 
                 <div className="pagination">
